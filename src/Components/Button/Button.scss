@@ -1,0 +1,43 @@
+@import '../../scss/variables.scss';
+
+
+.button{
+    padding: 10px;
+    min-width: 200px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin: 10px;
+    transition: all ease-in-out 200ms;
+}
+.button.outline{
+        border : 2px solid $color-b;
+        color: $color-b;       
+}
+.button.outline:hover{
+    border : 2px solid $color-b;
+    background: $color-b;
+    color: $color-3;       
+}
+.button.fill{
+        background : $color-b;
+        color: #fff;       
+}
+.button.fill:hover{
+    background : $color-3;
+    color: $color-b;      
+}
+.button.empty{
+        background : $color-3;
+        color: $color-b;    
+        border : 2px solid $color-3;
+    }
+    .button.empty:hover{
+        background : $color-b;
+        color: #fff;       
+        border : 2px solid $color-3;
+}
+.button:hover{
+    box-shadow: $shadow;
+}
