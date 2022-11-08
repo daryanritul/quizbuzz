@@ -1,0 +1,72 @@
+@import '../../scss/global.scss';
+
+.sidebar{
+    width: 250px;
+    background-image: linear-gradient($color-a, $color-c);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: bold;
+    font-size: 18px;
+    color: $color-b;
+    box-shadow: $shadow;    
+    &-logo{
+        width: 100%;
+        height: 120px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &-options{
+        
+        display: flex;
+        // background: $color-3;
+        color: $color-3;
+        width: 100%;
+        height: 60px;
+        margin-top: 10px;
+        justify-content: left;
+        align-items: center;
+        position: relative;
+    transition:  ease-in-out 200ms;
+    cursor: pointer;
+
+        &__icon{
+            margin-left: 20px;
+            margin-right: 20px;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    &-icon{
+        height: 30px;
+        width: 30px;
+    }
+}
+.sidebar-options:hover{
+    background: $color-3;
+    color: $color-b;
+}
+.sidebar-options::before{
+    content: "";
+    position: absolute;
+    left: 0px; 
+    height: 100%;
+    width: 7px;
+    transition: transform ease-in-out 200ms;
+    transform-origin: bottom;
+    transform: scale(1,0);
+    background-image: linear-gradient($color-a, $color-c);
+}
+.sidebar-options:hover::before{
+    transform: scale(1);
+}
+.sidebar-options.active{
+    background: $color-3;
+    color: $color-b;
+}
+.sidebar-options.active.sidebar-options::before{
+    transform: scale(1);
+}
