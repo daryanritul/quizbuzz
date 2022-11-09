@@ -1,0 +1,119 @@
+@import '../../scss/variables.scss';
+
+.quiz{
+    height: 100%;
+    display: flex;
+    position: relative;
+}
+.quiz.screenTitle{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: fit-content;
+}
+.quizBox{
+    margin-top: 4%;
+    width: 80%;
+    flex-direction: column;
+    position: relative;
+    &-question{
+        font-size: 18px;
+        font-weight: bold;
+        color: $color-1;
+        padding: 20px;
+    }
+    &-option{
+        padding: 20px 10px;
+        background: $color-4;
+        margin : 10px;
+        font-size: 16px;
+        cursor: pointer;
+        &:hover{
+            background: $color-b;
+            color: $color-3;
+        }
+        &.select{
+            color: $color-3;
+            background: $color-c;
+        }
+    }
+}
+
+
+.questionBox{
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+.duration{
+    height: 20%;
+    width: 100%;
+    text-align: center;
+    padding: 30px;
+    font-size: 18px;
+    background-image: linear-gradient($color-b, $color-c);
+    flex-direction: column;
+    p {
+        color: $color-4;
+        font-weight: bold;
+    }
+}
+.time-icon{
+    color: $color-4;
+    height: 30px;
+    width: 30px;
+    margin: 5px;
+}
+.questionList{
+    max-height: 65%;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    .question{
+        font-size: 14px;
+        font-weight: bold;
+        color: $color-4;
+        height: 50px;
+        width: 50px;
+        padding: 10px;
+        background: $color-2;
+        margin : 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+}
+.question.active{
+    border : 2px solid $color-a;
+}
+.question.done{
+    background: $color-s;
+}
+.question:hover{
+    background: $color-a;
+    opacity: 0.6;
+}
+
+.examButton{
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    width: 100%;
+    bottom: 10px;
+}
+.finishBtn{
+    position: absolute;
+    bottom: 10px;
+}
+.ansClear{
+    padding: 5px 15px;
+    color: $color-4;
+    border-radius: 5px;
+    margin : 10px;
+    background: $color-w;
+    width: fit-content;
+    }

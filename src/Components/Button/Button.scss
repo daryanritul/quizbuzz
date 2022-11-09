@@ -9,11 +9,16 @@
     text-transform: uppercase;
     cursor: pointer;
     margin: 10px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     transition: all ease-in-out 200ms;
 }
 .button.outline{
         border : 2px solid $color-b;
-        color: $color-b;       
+        color: $color-b;      
+        background-color: $color-4; 
 }
 .button.outline:hover{
     border : 2px solid $color-b;
@@ -21,8 +26,9 @@
     color: $color-3;       
 }
 .button.fill{
-        background : $color-b;
-        color: #fff;       
+        background-image: linear-gradient($color-b, $color-c);
+        color: #fff;
+        box-shadow: $shadow;       
 }
 .button.fill:hover{
     background : $color-3;
@@ -34,10 +40,14 @@
         border : 2px solid $color-3;
     }
     .button.empty:hover{
-        background : $color-b;
+        background : transparent;
         color: #fff;       
         border : 2px solid $color-3;
 }
 .button:hover{
     box-shadow: $shadow;
+}
+.questionBox-title{
+    padding: 5px;
+    font-weight: bold;
 }
