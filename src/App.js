@@ -1,6 +1,8 @@
 import React from 'react';
-import SideBar from './Components/SideBar/SideBar';
 
+import { Route, Routes } from 'react-router-dom';
+
+import SideBar from './Components/SideBar/SideBar';
 import Dashboard from './Screens/Dashboard/Dashboard';
 import Gradebook from './Screens/Gradebook/Gradebook';
 import Quiz from './Screens/Quiz/Quiz';
@@ -15,9 +17,11 @@ const App = () => {
       {/* <Quiz /> */}
       <SideBar />
       <div className="body">
-        <Dashboard />
-        {/* <Quiz /> */}
-        {/* <Gradebook /> */}
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/gradebook" element={<Gradebook />} />
+          <Route path="/quiz" element={<Quiz />} />
+        </Routes>
       </div>
     </div>
   );

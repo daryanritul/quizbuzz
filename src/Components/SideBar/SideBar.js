@@ -9,6 +9,7 @@ import {
   MdBorderAll,
   MdCircleNotifications,
 } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 
 const SideBar = () => {
   const [active, setActive] = useState('dashboard');
@@ -17,7 +18,8 @@ const SideBar = () => {
       <div className="sidebar-logo">
         <Logo />
       </div>
-      <div
+      <Link
+        to={'/'}
         className={`sidebar-options ${active == 'dashboard' && 'active'}`}
         onClick={() => setActive('dashboard')}
       >
@@ -25,8 +27,9 @@ const SideBar = () => {
           <MdSpaceDashboard className="sidebar-icon" />
         </div>
         <div className="sidebar-options__item">Dashboard</div>
-      </div>
-      <div
+      </Link>
+      <Link
+        to={'/quiz'}
         className={`sidebar-options ${active == 'quiz' && 'active'}`}
         onClick={() => setActive('quiz')}
       >
@@ -34,8 +37,9 @@ const SideBar = () => {
           <MdBorderAll className="sidebar-icon" />
         </div>
         <div className="sidebar-options__item">My Quiz</div>
-      </div>
-      <div
+      </Link>
+      <Link
+        to={'/gradebook'}
         className={`sidebar-options ${active == 'gradebook' && 'active'}`}
         onClick={() => setActive('gradebook')}
       >
@@ -43,7 +47,7 @@ const SideBar = () => {
           <MdAnalytics className="sidebar-icon" />
         </div>
         <div className="sidebar-options__item">Gradebook</div>
-      </div>
+      </Link>
       <div
         className={`sidebar-options ${active == 'performance' && 'active'}`}
         onClick={() => setActive('performance')}
