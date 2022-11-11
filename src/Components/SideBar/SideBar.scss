@@ -21,7 +21,7 @@
         
         display: flex;
         // background: $color-3;
-        color: $color-3;
+        color: $color-4;
         width: 100%;
         height: 60px;
         margin-top: 10px;
@@ -46,7 +46,7 @@
     }
 }
 .sidebar-options:hover{
-    background: $color-3;
+    background: $color-4;
     color: $color-b;
 }
 .sidebar-options::before{
@@ -64,7 +64,7 @@
     transform: scale(1);
 }
 .sidebar-options.active{
-    background: $color-3;
+    background: $color-4;
     color: $color-b;
 }
 .sidebar-options.active.sidebar-options::before{

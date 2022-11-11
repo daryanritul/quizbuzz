@@ -15,9 +15,9 @@ const App = () => {
       {/* <Quiz /> */}
       <SideBar />
       <div className="body">
-        {/* <Dashboard /> */}
+        <Dashboard />
         {/* <Quiz /> */}
-        <Gradebook />
+        {/* <Gradebook /> */}
       </div>
     </div>
   );
