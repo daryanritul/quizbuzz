@@ -1,0 +1,144 @@
+@import '../../scss/variables.scss';
+
+.gradeBook{
+    overflow-y: scroll;
+    &-title{
+        padding: 15px;
+        background: $color-4;
+        margin : 20px;
+        margin-bottom: 0px;
+        box-shadow: $shadow;
+        color: $color-1;
+        border-radius: 5px;
+    }
+    padding-bottom: 20px;
+}
+.report{
+    height: 200px;
+    display: flex;
+    background: $color-4;
+    margin : 20px;
+    margin-top : 10px;
+    box-shadow: $shadow;
+    flex-grow: 0;
+    flex-wrap: wrap;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+.resultHeader{
+    display: flex;
+    width: 100%;
+    justify-content : space-between;
+    align-items: center;
+    padding: 10px;
+    font-weight: bold;
+    color: $color-1;
+    background: $color-4;
+}
+.listIcon{
+    width: 30px;
+    cursor: pointer;
+    height: 30px;
+    color: $color-a;
+    margin: 0px 5px;
+    &:hover{
+        color: $color-4;
+        background: opacify($color-a , .6);
+    }
+}
+.marksheet-card{
+    margin: 0px 20px;
+    flex: 1;
+    &__table{
+        display: flex;
+        font-weight: bold;
+        align-items: center;
+        & > * {
+            width: 100%;
+        }
+        &.h{
+            padding: 5px;
+            color: $color-1;
+        }
+        &.r{
+            color: #000;
+            box-shadow: $shadow;
+            font-weight: normal;
+            background: $color-4;
+        font-size: 14px;
+
+            padding: 10px;
+            margin: 5px 0px;
+            border : 1px solid $color-3;
+            border-radius : 3px;
+        }   
+    }
+}
+.r-name{
+    font-weight: bold;
+}
+.r-status{
+    p{
+        padding: 5px 20px;
+        font-weight: bold;
+        font-size: 14px;
+        width : fit-content;
+        border-radius: 100px;
+    }
+}
+.r-status.passed{
+    p{
+        background: transparentize($color: $color-s, $amount: .9);
+        color: darken($color: $color-s, $amount: 0.9);
+    }
+}
+.r-status.absent{
+    p{
+
+        background: transparentize($color: $color-w, $amount: .9);
+        color: darken($color: $color-w, $amount: 0.9);
+    }
+}
+.r-status.failed{
+    p{
+        background: transparentize($color: $color-d, $amount: .9);
+    
+        color: darken($color: $color-d, $amount: 0.9);
+    }
+}
+
+.r-score, .r-grade{
+    font-weight: bold;
+}
+.passed{
+    p{
+        color: darken($color: $color-s, $amount: 0.9);
+    }
+}
+.absent{
+    p{
+        color: darken($color: $color-w, $amount: 0.9);
+    }
+}
+.failed{
+    p{
+           color: darken($color: $color-d, $amount: 0.9);
+    }
+}
+.r-details{
+    display: flex;
+    justify-content: end;
+    width: 5%;
+    &-icon{
+        width: 25px;
+        height: 25px;
+        color: $color-i;
+        cursor: pointer;
+        border-radius: 2px;
+    }:hover{
+        background: $color-c;
+        color: $color-4;
+    }
+}

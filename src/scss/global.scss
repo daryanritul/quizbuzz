@@ -43,3 +43,24 @@ button:focus {
     flex-direction: column;
     flex: 1;
 }
+
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 15px;
+  }
+
+  *::-webkit-scrollbar-track {
+      background-color: $color-3;
+    }
+    
+    *::-webkit-scrollbar-thumb {
+      background-image: linear-gradient($color-a, $color-c);
+    border-radius: 0px;
+    border: none
+  }

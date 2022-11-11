@@ -1,0 +1,59 @@
+@import '../../scss/variables.scss';
+
+.report-card{
+        width: 30%;
+        height: 40%;
+        padding: 10px;
+        display: flex;
+        flex-direction: row;
+        border: 1px solid $color-3;
+        border-radius: 5px;
+        margin : 10px;
+        &__icon{
+            width: 50px;
+            height: 50px;
+            margin : 5px;
+            border-radius: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: $color-c;
+            background: transparentize($color-c, 0.8); 
+        }
+        &__text{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 5px;
+            margin-left: 10px;
+            p{
+                font-weight: bold;
+                color: $color-2;
+            }
+        }
+    }
+    .report-icon{
+        width: 30px;
+        height: 30px;
+    }
+.report-card__icon.color-w{
+    color: $color-w;
+    background: transparentize($color-w, 0.8); 
+}
+.report-card__icon.color-i{
+    color: $color-i;
+    background: transparentize($color-i, 0.8); 
+}
+.report-card__icon.color-s{
+    color: $color-s;
+    background: transparentize($color-s, 0.8); 
+}.report-card__icon.color-d{
+    color: $color-d;
+    background: transparentize($color-d, 0.8); 
+}.report-card__icon.color-b{
+    color: $color-b;
+    background: transparentize($color-b, 0.8); 
+}.report-card__icon.color-1{
+    color: $color-1;
+    background: transparentize($color-1, 0.8); 
+}
