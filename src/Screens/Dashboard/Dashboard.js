@@ -5,29 +5,21 @@ import './Dashboard.scss';
 const Dashboard = () => {
   return (
     <div className="dashboard">
-      <h2 className="screenTitle">Dashboard</h2>
+      <h3 className="dashboard-title">Dashboard</h3>
       <div className="dashboard-body">
-        <div className="dashboard-body__item">
-          <div className="upcomming">
-            <div className="dashtitle">
-              <p>Upcomming Events</p>
-              <small>View All</small>
-            </div>
-            <div className="upcomming-tests">
-              <TestCard title="Machine Learning" />
-              <TestCard title="Data Science" />
-              <TestCard title="English" />
-              <TestCard title="Aptitude" />
-            </div>
+        <div className="dashboard-exam">
+          <div className="dashboard-exam__title">
+            <p>Upcomming Events</p>
+            <small>View All</small>
           </div>
-          <div className="results">
-            <div className="dashtitle">
-              <p>Pervious Results</p>
-              <small>View All</small>
-            </div>
+          <div className="dashboard-exam__list">
+            <TestCard title="Machine Learning" />
+            <TestCard title="Data Science" />
+            <TestCard title="English" />
+            <TestCard title="Aptitude" />
           </div>
         </div>
-        <div className="profile">pp</div>
+        <div className="dashboard-profile">pp</div>
       </div>
     </div>
   );

@@ -1,12 +1,49 @@
 @import '../../scss/global.scss';
 
 .dashboard{
-    height: 100%;
-}
-.screenTitle{
-    color: $color-1;
+display: flex;
+flex-direction: column;
+flex: 1;
+    &-title{
     padding: 15px;
-    height: 7%;
+    background: $color-4;
+    margin : 20px;
+    margin-bottom: 0px;
+    box-shadow: $shadow;
+    color: $color-1;
+    border-radius: 5px;
+    }
+    &-body{
+        display: flex;
+        flex-direction: row;
+        flex : 1;
+        padding: 20px;
+    }
+    &-exam{
+        width: 80%;
+        background: $color-4;
+        border-radius: 5px;
+        padding: 5px;
+        &__title{
+            font-weight: bold;
+            display: flex;
+            color: $color-1;
+            width: 100%;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px;
+            small{
+                color: $color-b;
+                cursor: pointer;
+            }
+        }
+    }
+    &-profile{
+        width: 20%;
+        background: $color-4;
+        margin-left : 10px;
+        border-radius: 5px;
+    }
 }
 .dashboard-body{
     height: 93%;
@@ -29,9 +66,11 @@
     box-shadow: $shadow;;
 }
 .upcomming {
-    height: 35%;
+    background: $color-4;
+    border-radius: 5px;
     &-tests{
         display: flex;
+        flex-direction: column;
     }
 }
 .results {
@@ -39,20 +78,11 @@
 }
 .upcomming, .results, .profile{
     margin : 10px;
+    margin-left: 20px;
     margin-bottom: 5px;
     padding: 10px;
 }
 
 .dashtitle{
-    font-weight: bold;
-    display: flex;
-    color: $color-1;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px;
-    small{
-        color: $color-b;
-        cursor: pointer;
-    }
+    
 }

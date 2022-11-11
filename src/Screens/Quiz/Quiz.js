@@ -17,7 +17,7 @@ const Quiz = () => {
   };
   return (
     <div className="quiz">
-      <div className="quiz screenTitle">{exam.title}</div>
+      <div className="quiztitle">{exam.title}</div>
       <div className="quizBox">
         <div className="quizBox-question">
           Question: {currQuiz + 1}. {exam.questionList[currQuiz][0]}
@@ -68,7 +68,8 @@ const Quiz = () => {
         <div className="duration">
           <p>Total Questions ({exam.questionList.length})</p>
           <span>
-            <MdTimer className="time-icon" /> <p>1h 34min 40sec</p>
+            <MdTimer className="time-icon" />
+            <p>00:34:40 </p>
           </span>
         </div>
         <p className="questionBox-title">Questions</p>

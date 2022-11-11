@@ -2,19 +2,64 @@
 
 .testCard{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     flex: 1;
-    color: $color-b;
-    background: $color-4;
+    border: 1px solid $color-3;
     border-radius: 3px;
-    width: 250px;
     justify-content: center;
-    align-items: center;
-    margin : 5px;
-    p{
+    margin : 10px;
+    padding: 10px;
+    &-body{
+        width: 85%;
+        position: relative;
+    }
+    &-btn{
+        width: 15%;
+        border-radius: 3px;
+        margin-left: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        font-size: 18px;
+        background: $color-4;
+        cursor: pointer;
+        border : 1px solid $color-3;
+        color: $color-i;
+        &:hover{
+            background: $color-i;
+            color: $color-4;
+        }
+    }
+    &-type{
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        background: $color-s;
+        color: $color-4;
+        padding: 5px 10px;
+        font-weight: bold;
+        margin : 10px;
+        border-radius: 3px;
+    }
+    &-text{
+        font-size: 14px;
         padding: 5px;
     }
-    h3{
-        padding: 5px;
+    &-footer{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &__box{
+            display: flex;
+            align-items: center;
+            background: transparentize($color: $color-d, $amount: .9);
+            color: $color-d;
+            padding: 5px;
+            font-weight: bold;
+            small{
+                padding-left :3px;
+            }
+        }
     }
 }
