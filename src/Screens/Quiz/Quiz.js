@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './Quiz.scss';
 
 import exam from '../../question.js';
 import Button from '../../Components/Button/Button';
 import { MdTimer } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
+import { context } from '../../store/store';
+import { uploadResult } from '../../store/actions/actions';
 const Quiz = () => {
   const [currQuiz, setCurrQuiz] = useState(0);
   const filledArray = Array(exam.questionList.length).fill(0);
@@ -15,36 +18,88 @@ const Quiz = () => {
     tempAns[index] = answer;
     setAns(tempAns);
   };
+  const [answer, setAnswer] = useState({});
+  const navigate = useNavigate();
+  const { state, dispatch } = useContext(context);
+  const [startAt, setStartAt] = useState('');
+  const [endsAt, setEndsAt] = useState('');
+  console.log(state.questions[currQuiz]);
+  console.log(state);
+
+  useEffect(() => {
+    setStartAt(Date.now());
+  }, []);
+
+  const submitExam = () => {
+    var score = 0;
+    state.questions.map(ques => {
+      if (ques.correct === answer[ques.id]) {
+        score++;
+      }
+    });
+    uploadResult(
+      {
+        title: state.activeQuiz.quiz,
+        startAt,
+        endsAt: Date.now(),
+        score,
+        total: state.questions.length,
+      },
+      state.user.uid,
+      state.activeQuiz.qid
+    );
+  };
+
   return (
     <div className="quiz">
       <div className="quiztitle">{exam.title}</div>
       <div className="quizBox">
         <div className="quizBox-question">
-          Question: {currQuiz + 1}. {exam.questionList[currQuiz][0]}
+          Question: {currQuiz + 1}. {state.questions[currQuiz].question}
         </div>
         <div
           className={`quizBox-option ${selectAnswer === 'a' && 'select'}`}
-          onClick={() => updateAnswer('a', currQuiz)}
+          onClick={() =>
+            setAnswer({
+              ...answer,
+              [state.questions[currQuiz].id]: 'A',
+            })
+          }
         >
-          A. {exam.questionList[currQuiz][1]}
+          A. {state.questions[currQuiz].options.A}
         </div>
         <div
           className={`quizBox-option ${selectAnswer === 'b' && 'select'}`}
-          onClick={() => updateAnswer('b', currQuiz)}
+          onClick={() =>
+            setAnswer({
+              ...answer,
+              [state.questions[currQuiz].id]: 'B',
+            })
+          }
         >
-          B. {exam.questionList[currQuiz][2]}
+          B. {state.questions[currQuiz].options.B}
         </div>
         <div
           className={`quizBox-option ${selectAnswer === 'c' && 'select'}`}
-          onClick={() => updateAnswer('c', currQuiz)}
+          onClick={() =>
+            setAnswer({
+              ...answer,
+              [state.questions[currQuiz].id]: 'C',
+            })
+          }
         >
-          C. {exam.questionList[currQuiz][3]}
+          C. {state.questions[currQuiz].options.C}
         </div>
         <div
           className={`quizBox-option ${selectAnswer === 'd' && 'select'}`}
-          onClick={() => updateAnswer('d', currQuiz)}
+          onClick={() =>
+            setAnswer({
+              ...answer,
+              [state.questions[currQuiz].id]: 'D',
+            })
+          }
         >
-          D. {exam.questionList[currQuiz][4]}
+          D. {state.questions[currQuiz].options.D}
         </div>
         <p onClick={() => updateAnswer(0, currQuiz)} className="ansClear">
           clear answer
@@ -86,7 +141,11 @@ const Quiz = () => {
           ))}
         </div>
         <div className="finishBtn">
-          <Button title="Finish Test" type={'fill'} />
+          <Button
+            title="Finish Test"
+            type={'fill'}
+            onSubmit={() => submitExam()}
+          />
         </div>
       </div>
     </div>

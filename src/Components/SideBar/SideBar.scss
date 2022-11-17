@@ -45,6 +45,12 @@
         width: 30px;
     }
 }
+.sidebar.close{
+    display: none;
+}
+.sidebar.opem{
+    display: flex;
+}
 .sidebar-options:hover{
     background: $color-4;
     color: $color-b;

@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { MdLogout, MdPerson } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
 import TestCard from '../../Components/TestCard/TestCard';
+import { getQuizAction, signOutHandler } from '../../store/actions/actions';
+import { context } from '../../store/store';
 import './Dashboard.scss';
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+  const { state, dispatch } = useContext(context);
+  useEffect(() => {
+    getQuizAction(state.user.classes)(dispatch);
+  }, []);
   return (
     <div className="dashboard">
       <div className="dashboard-title">
@@ -16,34 +24,17 @@ const Dashboard = () => {
             <small>View All</small>
           </div>
           <div className="dashboard-exam__list">
-            <TestCard
-              title="Machine Learning"
-              type="mock"
-              deadline={'21 jan, 2022'}
-              questions={20}
-              duration={145}
-            />
-            <TestCard
-              title="Artificial Intelligance"
-              type="mock"
-              deadline={'21 jan, 2022'}
-              questions={20}
-              duration={115}
-            />
-            <TestCard
-              title="Mobile Aplication Development"
-              type="restricted"
-              deadline={'21 jan, 2022'}
-              questions={60}
-              duration={60}
-            />
-            <TestCard
-              title="Machine Learning"
-              type="restricted"
-              deadline={'21 jan, 2022'}
-              questions={20}
-              duration={100}
-            />
+            {state.quizList.map((quiz, index) => (
+              <TestCard
+                key={quiz.qid}
+                title={quiz.quiz}
+                index={index}
+                type={quiz.type}
+                deadline={quiz.closesAt}
+                questions={quiz.questions.length}
+                duration={quiz.duration}
+              />
+            ))}
           </div>
         </div>
         <div className="dashboard-profile">
@@ -51,11 +42,11 @@ const Dashboard = () => {
             <div className="profile-avatar">
               <MdPerson className="profile-avatar__icon" />
             </div>
-            <div className="profile-title">RITUL DARYAN</div>
+            <div className="profile-title">{state.user.fullName}</div>
             <div className="profile-subtitle">M.C.A</div>
-            <div className="profile-subtitle">ritul.daryan.205@gmail.com</div>
+            <div className="profile-subtitle">{state.user.email}</div>
           </div>
-          <div className="signout">
+          <div className="signout" onClick={() => signOutHandler()(dispatch)}>
             <MdLogout className="signout-icon" />
             <p>SIGN OUT</p>
           </div>

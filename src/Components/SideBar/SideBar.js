@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Logo from '../Logo/Logo';
 import './SideBar.scss';
 
@@ -9,19 +9,27 @@ import {
   MdBorderAll,
   MdCircleNotifications,
 } from 'react-icons/md';
-import { Link } from 'react-router-dom';
-
+import { Link, useLocation } from 'react-router-dom';
+import { context } from '../../store/store';
 const SideBar = () => {
-  const [active, setActive] = useState('dashboard');
+  const location = useLocation();
+  const { state } = useContext(context);
+
   return (
-    <div className="sidebar">
+    <div
+      className={`sidebar ${
+        (location.pathname === '/signin' ||
+          location.pathname === '/signup' ||
+          !state.authState) &&
+        'close'
+      }`}
+    >
       <div className="sidebar-logo">
         <Logo />
       </div>
       <Link
         to={'/'}
-        className={`sidebar-options ${active == 'dashboard' && 'active'}`}
-        onClick={() => setActive('dashboard')}
+        className={`sidebar-options ${location.pathname == '/' && 'active'}`}
       >
         <div className="sidebar-options__icon">
           <MdSpaceDashboard className="sidebar-icon" />
@@ -30,37 +38,33 @@ const SideBar = () => {
       </Link>
       <Link
         to={'/quiz'}
-        className={`sidebar-options ${active == 'quiz' && 'active'}`}
-        onClick={() => setActive('quiz')}
+        className={`sidebar-options ${
+          location.pathname == '/quiz' && 'active'
+        }`}
       >
         <div className="sidebar-options__icon">
           <MdBorderAll className="sidebar-icon" />
         </div>
-        <div className="sidebar-options__item">My Quiz</div>
+        <div className="sidebar-options__item">Quiz</div>
       </Link>
       <Link
         to={'/gradebook'}
-        className={`sidebar-options ${active == 'gradebook' && 'active'}`}
-        onClick={() => setActive('gradebook')}
+        className={`sidebar-options ${
+          location.pathname == '/gradebook' && 'active'
+        }`}
       >
         <div className="sidebar-options__icon">
           <MdAnalytics className="sidebar-icon" />
         </div>
         <div className="sidebar-options__item">Gradebook</div>
       </Link>
-      <div
-        className={`sidebar-options ${active == 'performance' && 'active'}`}
-        onClick={() => setActive('performance')}
-      >
+      <div className={`sidebar-options`}>
         <div className="sidebar-options__icon">
           <MdMultilineChart className="sidebar-icon" />
         </div>
         <div className="sidebar-options__item">Performance</div>
       </div>
-      <div
-        className={`sidebar-options ${active == 'announcement' && 'active'}`}
-        onClick={() => setActive('announcement')}
-      >
+      <div className={`sidebar-options`}>
         <div className="sidebar-options__icon">
           <MdCircleNotifications className="sidebar-icon" />
         </div>
