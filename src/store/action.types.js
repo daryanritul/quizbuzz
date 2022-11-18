@@ -13,3 +13,5 @@ export const ADD_XLSX = 'ADD_XLSX';
 export const SET_ACTIVE = 'SET_ACTIVE';
 export const REMOVE_QUESTION = 'REMOVE_QUESTION';
 export const SELECT_QUESTION = 'SELECT_QUESTION';
+
+export const GET_RESULT = 'GET_RESULT';

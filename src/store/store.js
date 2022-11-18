@@ -22,4 +22,5 @@ export const initialState = {
   activeQuestion: {},
   questions: [],
   quizList: [],
+  myResults: [],
 };

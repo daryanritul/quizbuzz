@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import ReportCard from '../../Components/ReportCard/ReportCard';
 import './Gradebook.scss';
 
@@ -17,6 +17,8 @@ import {
   MdViewModule,
 } from 'react-icons/md';
 import InputBox from '../../Components/InputBox/InputBox';
+import { getMyResults } from '../../store/actions/actions';
+import { context } from '../../store/store';
 
 const result = [
   {
@@ -58,6 +60,31 @@ const result = [
 ];
 
 const Gradebook = () => {
+  const { state, dispatch } = useContext(context);
+  useEffect(() => {
+    getMyResults(state.user.uid)(dispatch);
+  }, []);
+
+  const d = date => {
+    var myDate = new Date(date);
+    return myDate.toLocaleDateString();
+  };
+
+  function timeDifference(d1, d2) {
+    var date1 = new Date(d1);
+    var date2 = new Date(d2);
+    var difference = date1.getTime() - date2.getTime();
+
+    var hoursDifference = Math.floor(difference / 1000 / 60 / 60);
+    difference -= hoursDifference * 1000 * 60 * 60;
+
+    var minutesDifference = Math.floor(difference / 1000 / 60);
+    difference -= minutesDifference * 1000 * 60;
+
+    var secondsDifference = Math.floor(difference / 1000);
+
+    return hoursDifference + ':' + minutesDifference + ':' + secondsDifference;
+  }
   return (
     <div className="gradeBook">
       <h3 className="gradeBook-title">GRADEBOOK</h3>
@@ -108,22 +135,24 @@ const Gradebook = () => {
             <div>Submitted</div>
             <div className="r-details">Details</div>
           </div>
-          {result.map((res, index) => (
+          {state.myResults.map((res, index) => (
             <div className="marksheet-card__table r">
-              <div className="r-name">{res.name}</div>
+              <div className="r-name">{res.title}</div>
               <div className={`r-status ${res.status}`}>
                 <p>{res.status}</p>
               </div>
               <div className={`r-score ${res.status}`}>
                 <p>
-                  {res.score}/{res.totalScore}
+                  {res.score}/{res.total}
                 </p>
               </div>
               <div className={`r-grade ${res.status}`}>
                 <p>{res.grade}</p>
               </div>
-              <div className="r-timeSpent">{res.timeSpent}</div>
-              <div className="r-submitted">{res.submitted}</div>
+              <div className="r-timeSpent">
+                {timeDifference(res.endsAt, res.startAt)} Hr
+              </div>
+              <div className="r-submitted">{d(res.endsAt)}</div>
               <div className="r-details">
                 <MdKeyboardArrowDown className="r-details-icon" />
               </div>

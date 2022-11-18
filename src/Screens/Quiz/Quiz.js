@@ -7,6 +7,7 @@ import { MdTimer } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import { context } from '../../store/store';
 import { uploadResult } from '../../store/actions/actions';
+import Timer from '../../utils/Timer';
 const Quiz = () => {
   const [currQuiz, setCurrQuiz] = useState(0);
   const filledArray = Array(exam.questionList.length).fill(0);
@@ -22,13 +23,15 @@ const Quiz = () => {
   const navigate = useNavigate();
   const { state, dispatch } = useContext(context);
   const [startAt, setStartAt] = useState('');
-  const [endsAt, setEndsAt] = useState('');
-  console.log(state.questions[currQuiz]);
-  console.log(state);
 
   useEffect(() => {
     setStartAt(Date.now());
   }, []);
+
+  const onFinishTimer = () => {
+    console.log('POPUP/');
+    // navigate('/');
+  };
 
   const submitExam = () => {
     var score = 0;
@@ -44,12 +47,37 @@ const Quiz = () => {
         endsAt: Date.now(),
         score,
         total: state.questions.length,
+        status: 'passed',
+        grade: 'good',
       },
       state.user.uid,
       state.activeQuiz.qid
     );
   };
 
+  const clearAns = uid => {
+    let newAns = { ...answer };
+    delete newAns[uid];
+    setAnswer(newAns);
+  };
+
+  const pegination = path => {
+    if (path == 'prev') {
+      if (currQuiz === 0) {
+        setCurrQuiz(state.questions.length - 1);
+      } else setCurrQuiz(currQuiz - 1);
+    } else if (path == 'next') {
+      if (currQuiz === state.questions.length - 1) {
+        setCurrQuiz(0);
+      } else setCurrQuiz(currQuiz + 1);
+    }
+  };
+  var time = state.activeQuiz.duration.split(':');
+  const hoursMinSecs = {
+    hours: parseInt(time[0]),
+    minutes: parseInt(time[1]),
+    seconds: 0,
+  };
   return (
     <div className="quiz">
       <div className="quiztitle">{exam.title}</div>
@@ -58,7 +86,9 @@ const Quiz = () => {
           Question: {currQuiz + 1}. {state.questions[currQuiz].question}
         </div>
         <div
-          className={`quizBox-option ${selectAnswer === 'a' && 'select'}`}
+          className={`quizBox-option ${
+            answer[state.questions[currQuiz].id] === 'A' && 'select'
+          }`}
           onClick={() =>
             setAnswer({
               ...answer,
@@ -69,7 +99,9 @@ const Quiz = () => {
           A. {state.questions[currQuiz].options.A}
         </div>
         <div
-          className={`quizBox-option ${selectAnswer === 'b' && 'select'}`}
+          className={`quizBox-option ${
+            answer[state.questions[currQuiz].id] === 'B' && 'select'
+          }`}
           onClick={() =>
             setAnswer({
               ...answer,
@@ -80,7 +112,9 @@ const Quiz = () => {
           B. {state.questions[currQuiz].options.B}
         </div>
         <div
-          className={`quizBox-option ${selectAnswer === 'c' && 'select'}`}
+          className={`quizBox-option ${
+            answer[state.questions[currQuiz].id] === 'C' && 'select'
+          }`}
           onClick={() =>
             setAnswer({
               ...answer,
@@ -91,7 +125,9 @@ const Quiz = () => {
           C. {state.questions[currQuiz].options.C}
         </div>
         <div
-          className={`quizBox-option ${selectAnswer === 'd' && 'select'}`}
+          className={`quizBox-option ${
+            answer[state.questions[currQuiz].id] === 'D' && 'select'
+          }`}
           onClick={() =>
             setAnswer({
               ...answer,
@@ -101,21 +137,22 @@ const Quiz = () => {
         >
           D. {state.questions[currQuiz].options.D}
         </div>
-        <p onClick={() => updateAnswer(0, currQuiz)} className="ansClear">
+        <p
+          onClick={() => clearAns(state.questions[currQuiz].id)}
+          className="ansClear"
+        >
           clear answer
         </p>
         <div className="examButton">
           <Button
             title={'Pervious'}
             type="outline"
-            onSubmit={() => {
-              if (currQuiz >= 0) setCurrQuiz(currQuiz - 1);
-            }}
+            onSubmit={() => pegination('prev')}
           />
           <Button
             title={'Next'}
             type="outline"
-            onSubmit={() => setCurrQuiz(currQuiz + 1)}
+            onSubmit={() => pegination('next')}
           />
         </div>
       </div>
@@ -124,15 +161,15 @@ const Quiz = () => {
           <p>Total Questions ({exam.questionList.length})</p>
           <span>
             <MdTimer className="time-icon" />
-            <p>00:34:40 </p>
+            <Timer hoursMinSecs={hoursMinSecs} onFinish={onFinishTimer} />
           </span>
         </div>
         <p className="questionBox-title">Questions</p>
         <div className="questionList">
-          {exam.questionList.map((item, index) => (
+          {state.questions.map((item, index) => (
             <div
               className={`question ${index === currQuiz && 'active'} ${
-                ans[index] !== 0 && 'done'
+                answer[item.id] && 'done'
               }`}
               onClick={() => setCurrQuiz(index)}
             >

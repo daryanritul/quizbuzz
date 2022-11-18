@@ -3,6 +3,7 @@ import {
   ADD_XLSX,
   ERROR,
   GET_QUIZ_LIST,
+  GET_RESULT,
   REMOVE_QUESTION,
   SET_ACTIVE,
   START,
@@ -71,6 +72,11 @@ const reducer = (state, { payload, type }) => {
       return {
         ...state,
         questions: state.questions.filter(ques => ques.id !== payload),
+      };
+    case GET_RESULT:
+      return {
+        ...state,
+        myResults: payload,
       };
     case USER_LOGOUT:
       return initialState;

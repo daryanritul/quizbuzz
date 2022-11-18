@@ -2,6 +2,7 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import {
   checkProfile,
   getQuiz,
+  getResult,
   logOut,
   setQuizzes,
   setResult,
@@ -14,6 +15,7 @@ import {
   ADD_XLSX,
   ERROR,
   GET_QUIZ_LIST,
+  GET_RESULT,
   REMOVE_QUESTION,
   SET_ACTIVE,
   START,
@@ -210,5 +212,27 @@ export const uploadResult = (result, uid, qid) => {
     })
     .catch(err => {
       console.log('Failed', err);
+    });
+};
+
+export const getMyResults = uid => dispatch => {
+  dispatch({
+    type: START,
+  });
+  getResult(uid)
+    .then(snapshot => {
+      var list = [];
+      snapshot.forEach(doc => {
+        list.push(doc.data());
+      });
+      dispatch({
+        type: GET_RESULT,
+        payload: list,
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: ERROR,
+      });
     });
 };

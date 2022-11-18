@@ -62,3 +62,8 @@ export const setResult = async (result, uid, qid) => {
   const docRef = doc(db, 'studentProfiles', uid, 'myResult', qid);
   return await setDoc(docRef, { ...result });
 };
+
+export const getResult = async uid => {
+  const docRef = collection(db, 'studentProfiles', uid, 'myResult');
+  return await getDocs(docRef);
+};
