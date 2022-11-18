@@ -8,17 +8,12 @@ import { useNavigate } from 'react-router-dom';
 import { context } from '../../store/store';
 import { uploadResult } from '../../store/actions/actions';
 import Timer from '../../utils/Timer';
+import Modal from '../../Components/Modal/Modal';
 const Quiz = () => {
   const [currQuiz, setCurrQuiz] = useState(0);
   const filledArray = Array(exam.questionList.length).fill(0);
   const [ans, setAns] = useState(filledArray);
-  const [selectAnswer, setSelectAnswer] = useState('');
-  const updateAnswer = (answer, index) => {
-    setSelectAnswer(answer);
-    var tempAns = ans;
-    tempAns[index] = answer;
-    setAns(tempAns);
-  };
+  const [modal, setModal] = useState(false);
   const [answer, setAnswer] = useState({});
   const navigate = useNavigate();
   const { state, dispatch } = useContext(context);
@@ -29,8 +24,8 @@ const Quiz = () => {
   }, []);
 
   const onFinishTimer = () => {
-    console.log('POPUP/');
-    // navigate('/');
+    console.log('DOME');
+    setModal(true);
   };
 
   const submitExam = () => {
@@ -53,6 +48,12 @@ const Quiz = () => {
       state.user.uid,
       state.activeQuiz.qid
     );
+    setModal(false);
+    navigate('/');
+  };
+
+  const onClickFinish = () => {
+    setModal(true);
   };
 
   const clearAns = uid => {
@@ -80,6 +81,15 @@ const Quiz = () => {
   };
   return (
     <div className="quiz">
+      {modal && (
+        <Modal
+          title="Finish Test"
+          body="Are you sure to finish Test?"
+          onConfirm={submitExam}
+          onCancel={() => setModal(false)}
+          confirmTitle="Finish Test"
+        />
+      )}
       <div className="quiztitle">{exam.title}</div>
       <div className="quizBox">
         <div className="quizBox-question">
@@ -181,7 +191,7 @@ const Quiz = () => {
           <Button
             title="Finish Test"
             type={'fill'}
-            onSubmit={() => submitExam()}
+            onSubmit={() => onClickFinish()}
           />
         </div>
       </div>

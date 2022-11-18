@@ -1,6 +1,7 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { MdLogout, MdPerson } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
+import Modal from '../../Components/Modal/Modal';
 import TestCard from '../../Components/TestCard/TestCard';
 import { getQuizAction, signOutHandler } from '../../store/actions/actions';
 import { context } from '../../store/store';
@@ -12,6 +13,7 @@ const Dashboard = () => {
   useEffect(() => {
     getQuizAction(state.user.classes)(dispatch);
   }, []);
+
   return (
     <div className="dashboard">
       <div className="dashboard-title">

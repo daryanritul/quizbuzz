@@ -1,13 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { MdCalendarToday, MdTimer } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import { setActive } from '../../store/actions/actions';
 import { context } from '../../store/store';
 import Button from '../Button/Button';
+import Modal from '../Modal/Modal';
 import './TestCard.scss';
 
 const TestCard = ({ title, type, questions, duration, deadline, index }) => {
   const navigate = useNavigate();
+  const [modal, setModal] = useState(false);
   const { state, dispatch } = useContext(context);
   var dateTime = deadline.split('T');
   var time = dateTime[1].split(':');
@@ -15,11 +17,21 @@ const TestCard = ({ title, type, questions, duration, deadline, index }) => {
 
   const onSelectStart = () => {
     setActive(state.quizList[index])(dispatch);
+    setModal(false);
     navigate('/quiz');
   };
 
   return (
     <div className="testCard">
+      {modal && (
+        <Modal
+          title="Start Test"
+          body="Are your sure want to start the test now?"
+          confirmTitle="Start Test"
+          onConfirm={onSelectStart}
+          onCancel={() => setModal(false)}
+        />
+      )}
       <div className="testCard-body">
         <h3>{title}</h3>
         <p className={`testCard-type ${type}`}>{type} Test</p>
@@ -38,7 +50,7 @@ const TestCard = ({ title, type, questions, duration, deadline, index }) => {
           </div>
         </div>
       </div>
-      <div className="testCard-btn" onClick={() => onSelectStart()}>
+      <div className="testCard-btn" onClick={() => setModal(true)}>
         START
       </div>
     </div>
