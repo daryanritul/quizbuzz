@@ -10,6 +10,7 @@ import './Dashboard.scss';
 const Dashboard = () => {
   const navigate = useNavigate();
   const { state, dispatch } = useContext(context);
+
   useEffect(() => {
     getQuizAction(state.user.classes)(dispatch);
   }, []);

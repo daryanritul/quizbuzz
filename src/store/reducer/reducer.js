@@ -77,6 +77,7 @@ const reducer = (state, { payload, type }) => {
       return {
         ...state,
         myResults: payload,
+        loading: false,
       };
     case USER_LOGOUT:
       return initialState;

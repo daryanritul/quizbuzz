@@ -9,6 +9,7 @@ import SideBar from './Components/SideBar/SideBar';
 import { database, db, firestore } from './firebase/config';
 import Dashboard from './Screens/Dashboard/Dashboard';
 import Gradebook from './Screens/Gradebook/Gradebook';
+import Loading from './Screens/Loading/Loading';
 import Quiz from './Screens/Quiz/Quiz';
 import SignIn from './Screens/SignIn/SignIn';
 import SignUp from './Screens/SignUp/SignUp';
@@ -28,6 +29,7 @@ const App = () => {
     <div className="app">
       <SideBar />
       <div className="body">
+        {state.loading && <Loading />}
         <Routes>
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
